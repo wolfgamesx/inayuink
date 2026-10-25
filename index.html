@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizador & Studio Ink</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --accent-color: #e63946;
+      --text-color: #ffffff;
+      --text-secondary: #a0a0a0;
+      --border-color: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      background-image: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.75)), url('img/fondo.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-color);
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(30, 30, 30, 0.85); /* Fondo semitransparente para ver la imagen detrás */
+      backdrop-filter: blur(4px); /* Efecto blur opcional súper elegante */
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    header p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    /* Grid de Estilos y Zonas */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .option-btn {
+      background: #2a2a2a;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .option-btn.selected {
+      border-color: var(--accent-color);
+      background: rgba(230, 57, 70, 0.15);
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    /* Range Slider */
+    .range-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .range-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-color);
+    }
+
+    /* Textarea / Input */
+    textarea {
+      width: 100%;
+      background: #2a2a2a;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text-color);
+      padding: 10px;
+      font-size: 0.85rem;
+      resize: none;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-color);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    .whatsapp-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      line-height: 1.3;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: var(--border-color);
+      margin: 24px 0;
+    }
+
+    /* Portafolio / Galería */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .gallery-item {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
+      background-color: #2a2a2a;
+    }
+
+    /* Cuidados Posteriores (Aftercare) */
+    details {
+      background: #2a2a2a;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    summary {
+      font-weight: bold;
+      color: var(--text-color);
+    }
+
+    details p {
+      margin-top: 8px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <h1>Inayuink</h1>
+      <p>Visualiza. Elige. Tatúate.</p>
+    </header>
+
+    <!-- 1. Estilo -->
+    <div class="form-group">
+      <div class="section-title">1. Selecciona el estilo</div>
+      <div class="options-grid" id="style-options">
+        <button class="option-btn selected" onclick="selectOption('style', this, 'Minimalista')">Minimalista</button>
+        <button class="option-btn" onclick="selectOption('style', this, 'Blackwork / Sombras')">Blackwork / Sombras</button>
+        <button class="option-btn" onclick="selectOption('style', this, 'Color')">Color</button>
+        <button class="option-btn" onclick="selectOption('style', this, 'Neotradicional')">Neotradicional</button>
+      </div>
+    </div>
+
+    <!-- 2. Zona -->
+    <div class="form-group">
+      <div class="section-title">2. Zona del cuerpo</div>
+      <div class="options-grid" id="zone-options">
+        <button class="option-btn selected" onclick="selectOption('zone', this, 'Brazo / Antebrazo')">Brazo / Antebrazo</button>
+        <button class="option-btn" onclick="selectOption('zone', this, 'Muñeca / Tobillo')">Muñeca / Tobillo</button>
+        <button class="option-btn" onclick="selectOption('zone', this, 'Espalda / Pecho')">Espalda / Pecho</button>
+        <button class="option-btn" onclick="selectOption('zone', this, 'Costilla / Cuello')">Costilla / Cuello</button>
+      </div>
+    </div>
+
+    <!-- 3. Tamaño -->
+    <div class="form-group">
+      <div class="range-container">
+        <div class="range-header">
+          <span class="section-title" style="margin:0;">3. Tamaño aproximado</span>
+          <span id="size-value" style="font-weight:bold;">8 cm</span>
+        </div>
+        <input type="range" id="size-range" min="3" max="30" value="8" oninput="updateSizeDisplay()">
+      </div>
+    </div>
+
+    <!-- 4. Descripción y Subida de Referencia -->
+    <div class="form-group">
+      <div class="section-title">4. Tu idea o foto de referencia</div>
+      <textarea id="idea-text" rows="2" placeholder="Ej: Trazo minimalista pequeño..."></textarea>
+      
+      <div style="margin-top: 10px;">
+        <label for="image-input" style="display: block; background: #2a2a2a; border: 1px dashed var(--accent-color); padding: 12px; border-radius: 10px; text-align: center; cursor: pointer; font-size: 0.85rem; color: var(--text-color);">
+          📷 Adjuntar foto de referencia
+        </label>
+        <input type="file" id="image-input" accept="image/*" style="display: none;" onchange="previewImage(event)">
+      </div>
+
+      <!-- Vista previa de la foto seleccionada -->
+      <div id="image-preview-container" style="display: none; margin-top: 10px; text-align: center;">
+        <img id="image-preview" src="" alt="Referencia" style="max-width: 100%; max-height: 150px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;">Foto cargada en la app ✓</p>
+      </div>
+    </div>
+
+    <!-- Botón de Acción -->
+    <button class="submit-btn" onclick="sendToWhatsApp()">Cotización aquí</button>
+    <p class="whatsapp-note">📌 Al hacer clic se abrirá WhatsApp con tus datos. <strong>Recuerda adjuntar tu foto de referencia en el chat.</strong></p>
+
+    <hr>
+
+    <!-- Portafolio / Trabajos Recientes -->
+    <div class="section-title" style="margin-bottom: 12px;">Trabajos Recientes</div>
+    <div class="gallery-grid">
+      <img class="gallery-item" src="img/tatuaje1.webp" alt="Tatuaje 1">
+      <img class="gallery-item" src="img/tatuaje2.webp" alt="Tatuaje 2">
+      <img class="gallery-item" src="img/tatuaje3.webp" alt="Tatuaje 3">
+      <img class="gallery-item" src="img/tatuaje4.webp" alt="Tatuaje 4">
+    </div>
+
+    <hr>
+
+    <!-- Cuidados Posteriores (Aftercare) -->
+    <div class="section-title" style="margin-bottom: 12px;">Cuidados Posteriores</div>
+    
+    <details>
+      <summary>🧼 Primeras 24 horas</summary>
+      <p>Retira el parche o film protector según la indicación del tatuador (entre 2 y 4 horas después). Lava suavemente con agua tibia y jabón neutro sin frotar.</p>
+    </details>
+
+    <details>
+      <summary>🧴 Hidratación y Crema</summary>
+      <p>Aplica una capa muy fina de crema especial para tatuajes 2 a 3 veces al día durante los primeros 10-15 días. No te excedas con la crema.</p>
+    </details>
+
+    <details>
+      <summary>🚫 Lo que debes evitar</summary>
+      <p>No te rasques ni arranques las cáscaras. Evita piscinas, playas, sauna y sol directo durante al menos 2 semanas.</p>
+    </details>
+
+  </div>
+
+  <script>
+    let selectedStyle = "Minimalista";
+    let selectedZone = "Brazo / Antebrazo";
+    let phoneStudio = "584164116483"; // Tu número de WhatsApp
+
+    function selectOption(type, element, value) {
+      const parent = element.parentElement;
+      const buttons = parent.querySelectorAll('.option-btn');
+      buttons.forEach(btn => btn.classList.remove('selected'));
+      element.classList.add('selected');
+
+      if (type === 'style') selectedStyle = value;
+      if (type === 'zone') selectedZone = value;
+    }
+
+    function updateSizeDisplay() {
+      const size = document.getElementById('size-range').value;
+      document.getElementById('size-value').innerText = `${size} cm`;
+    }
+
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('image-preview').src = e.target.result;
+          document.getElementById('image-preview-container').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function sendToWhatsApp() {
+      const size = document.getElementById('size-range').value;
+      const idea = document.getElementById('idea-text').value.trim();
+
+      let message = `¡Hola! Me gustaría consultar por un tatuaje:\n- Estilo:\n${selectedStyle}\n- Zona:\n${selectedZone}\n- Tamaño:\n${size} cm aprox.`;
+
+      if (idea !== "") {
+        message += `\n- Idea / Detalle:\n${idea}`;
+      }
+
+      message += `\n\n(Te adjunto mi foto de referencia aquí en el chat 👇)`;
+
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/${phoneStudio}?text=${encodedMessage}`, '_blank');
+    }
+
+    updateSizeDisplay();
+  </script>
+</body>
+</html>
