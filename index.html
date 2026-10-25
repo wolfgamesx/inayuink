@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cotizador & Studio Ink</title>
+  <title>Inayuink</title>
   <style>
     :root {
       --bg-color: #121212;
@@ -15,10 +15,17 @@
     }
 
     html, body {
-      width: 100%;
+      width: 100vw;
+      min-height: 100vh;
       overflow-x: hidden;
       margin: 0;
       padding: 0;
+      background-color: var(--bg-color);
+      background-image: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.75)), url('img/fondo.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-color);
     }
 
     * {
@@ -29,17 +36,20 @@
     }
 
     body {
-      background-color: var(--bg-color);
-      background-image: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.75)), url('img/fondo.webp');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: var(--text-color);
       padding: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto; /* Esto fuerza a que se centre perfectamente sin depender del flexbox de Instagram */
+      background: rgba(30, 30, 30, 0.85); 
+      backdrop-filter: blur(4px); 
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      box-sizing: border-box;
     }
 
     .app-container {
