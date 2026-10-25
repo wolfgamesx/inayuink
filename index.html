@@ -14,6 +14,13 @@
       --border-color: #333333;
     }
 
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -22,31 +29,30 @@
     }
 
     body {
-  background-color: var(--bg-color);
-  background-image: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.75)), url('img/fondo.webp');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: var(--text-color);
-  padding: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* <--- Agrega esta línea */
-  min-height: 100vh; /* Asegura que cubra toda la altura */
-  margin: 0;         /* Evita márgenes predeterminados del navegador */
-}
+      background-color: var(--bg-color);
+      background-image: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.75)), url('img/fondo.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-color);
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
 
-.app-container {
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;    /* <--- Agrega esta línea para forzar centrado perfecto */
-  background: rgba(30, 30, 30, 0.85); 
-  backdrop-filter: blur(4px); 
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-  box-sizing: border-box; /* <--- Asegura que los paddings no sumen ancho extra */
-}
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      background: rgba(30, 30, 30, 0.85); 
+      backdrop-filter: blur(4px); 
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      box-sizing: border-box;
+    }
 
     header {
       text-align: center;
@@ -346,10 +352,10 @@
       const size = document.getElementById('size-range').value;
       const idea = document.getElementById('idea-text').value.trim();
 
-      let message = `¡Hola! Me gustaría consultar por un tatuaje:\n- Estilo:\n${selectedStyle}\n- Zona:\n${selectedZone}\n- Tamaño:\n${size} cm aprox.`;
+      let message = `¡Hola! Me gustaría consultar por un tatuaje:\nEstilo: ${selectedStyle}\nZona: ${selectedZone}\nTamaño: ${size} cm aprox.`;
 
       if (idea !== "") {
-        message += `\n- Idea / Detalle:\n${idea}`;
+        message += `\nIdea / Detalle: ${idea}`;
       }
 
       message += `\n\n(Te adjunto mi foto de referencia aquí en el chat 👇)`;
